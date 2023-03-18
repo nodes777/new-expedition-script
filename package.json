@@ -1,0 +1,26 @@
+{
+  "name": "new-expedition-script",
+  "version": "1.0.0",
+  "description": "A script to move photos off my camera, and around my file system",
+  "main": "main.ts",
+  "type": "module",
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "test": "test",
+    "build": "tsc",
+    "new-exp": "ts-node src/main.ts"
+  },
+  "author": "Taylor Nodell and ChatGPT",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/luxon": "3.2.0",
+    "@types/node": "18.15.3",
+    "ts-node": "10.9.1",
+    "typescript": "5.0.2"
+  },
+  "dependencies": {
+    "luxon": "3.3.0",
+    "trash": "8.1.1",
+    "xlsx": "0.18.5"
+  }
+}
