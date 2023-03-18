@@ -4,25 +4,28 @@ import { DateTime } from "luxon";
 import * as XLSX from "xlsx";
 import trash from "trash";
 
+XLSX.set_fs(fs);
+
 const startTime = DateTime.now();
-const photos_path = "D:\\Photos";
-const keepers_path = "D:\\Photos\\Keepers";
+const photosPath = "D:\\Photos";
+const cameraPath = "E:/DCIM/108D3400";
+const keepersPath = "D:\\Photos\\Keepers";
 const file_prefix = "DSC_";
 const file_suffixes = [".JPG", ".NEF", ".MOV"];
 const delimeters = [";", ","];
-const temp_descriptions_path =
-  "D:\\Photos\\Keepers\\Loftus_Loop_2021-12-05\\descriptions.xlsx";
 
 interface PhotoDescription {
   "Photo Numbers": string;
 }
 
-export const sortPhotos = (descriptionsPath: string) => {
-  const initialPath = path.dirname(descriptionsPath);
-  const destinationPath = path.join(initialPath, "keepers");
+export const sortPhotos = async (descriptionsPath: string) => {
+  const initialPath = descriptionsPath
+    .replace("Keepers\\", "")
+    .replace("descriptions.xlsx", "");
+  const destinationPath = descriptionsPath.replace("descriptions.xlsx", "");
   const filesToMove = readSheet(descriptionsPath, initialPath);
-  movePhotos(filesToMove, initialPath, destinationPath);
-  deleteNEFFiles(initialPath);
+  await movePhotos(filesToMove, initialPath, destinationPath);
+  await deleteNEFFiles(initialPath);
   console.log("\nDone!");
   console.log(`--- ${DateTime.now().diff(startTime).seconds} seconds ---`);
 };
@@ -47,6 +50,7 @@ const readSheet = (descriptionsPath: string, initialPath: string) => {
         file_suffixes.forEach((fileSuffix) => {
           const potentialFile = file_prefix + fileNum + fileSuffix;
           const fileInPath = path.join(initialPath, potentialFile);
+
           if (fs.existsSync(fileInPath)) {
             fileNamesToMove.push(potentialFile);
           }
@@ -80,11 +84,12 @@ const movePhotos = async (
   console.log(`Moved: ${numMoved} files`);
 };
 
-const deleteNEFFiles = async (path: string) => {
+const deleteNEFFiles = async (deletionPath: string) => {
   let nefCounter = 0;
   let numDeleted = 0;
   const filesToDelete: string[] = [];
-  const files = await fs.promises.readdir(path);
+  const files = await fs.promises.readdir(deletionPath);
+
   files.forEach((file) => {
     if (file.endsWith(".NEF")) {
       nefCounter += 1;
@@ -94,14 +99,15 @@ const deleteNEFFiles = async (path: string) => {
 
   for (let i = 0; i < filesToDelete.length; i++) {
     const fileToDelete = filesToDelete[i];
+
     if (
-      !fs.lstatSync(fileToDelete).isDirectory() &&
+      !fs.lstatSync(path.join(deletionPath, fileToDelete)).isDirectory() &&
       fileToDelete.endsWith(".NEF")
     ) {
       console.log(
         `Deleting: ${fileToDelete} ${i + 1}/${nefCounter} .NEF files`
       );
-      await trash(`${path}${fileToDelete}`);
+      await trash(`${deletionPath}${fileToDelete}`);
       numDeleted += 1;
     }
   }

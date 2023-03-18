@@ -15,7 +15,7 @@ const descriptionsTemplatePath = path.join(
 const descriptionsFileName = "descriptions.xlsx";
 const todaysDate = DateTime.local().toFormat("yyyy-MM-dd");
 
-export const createNewExpedition = (folderNameInput: string) => {
+export const createNewExpedition = async (folderNameInput: string) => {
   const startTime = Date.now();
   const [newFolderPath, newFolderName] = makeNewFolder(folderNameInput);
   movePhotosFromCameraToComp(cameraPath, newFolderPath);
@@ -23,7 +23,7 @@ export const createNewExpedition = (folderNameInput: string) => {
   console.log(`--- ${Date.now() - startTime} milliseconds ---`);
   child_process.spawn("explorer.exe", [newFolderPath]);
   // After the files have been copied to the computer, delete them from the SD card
-  deleteFilesFromSdCard(cameraPath);
+  await deleteFilesFromSdCard(cameraPath);
   return descriptionsFile;
 };
 
