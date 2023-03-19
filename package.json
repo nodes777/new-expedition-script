@@ -8,10 +8,11 @@
     "start": "ts-node src/main.ts",
     "test": "test",
     "build": "tsc",
-    "new-exp": "ts-node src/main.ts"
+    "new-exp": "ts-node src/main.ts",
+    "sort-photos": "ts-node src/sortPhotosCaller.ts"
   },
   "author": "Taylor Nodell and ChatGPT",
-  "license": "ISC",
+  "license": "GPL3.0",
   "devDependencies": {
     "@types/luxon": "3.2.0",
     "@types/node": "18.15.3",

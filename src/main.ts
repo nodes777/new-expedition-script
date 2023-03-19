@@ -1,5 +1,5 @@
 import { createNewExpedition } from "./createNewExpedition";
-import { sortPhotos } from "./movePhotos";
+import { sortPhotos } from "./sortPhotos";
 
 import * as readline from "node:readline/promises";
 
@@ -20,7 +20,7 @@ const main = async () => {
   if (answer === "y") {
     console.log("Moving photos...");
     console.log(descriptionsFile);
-    sortPhotos(descriptionsFile);
+    await sortPhotos(descriptionsFile);
     rl.close();
   } else if (answer === "n") {
     console.log("Ok here's the file path for later");
