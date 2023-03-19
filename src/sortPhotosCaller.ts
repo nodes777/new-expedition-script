@@ -1,12 +1,4 @@
-import { createNewExpedition } from "./createNewExpedition";
 import { sortPhotos } from "./sortPhotos";
-
-import * as readline from "node:readline/promises";
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
 
 const sortPhotosCaller = async () => {
   const descriptionsFileName = process.argv[2];
