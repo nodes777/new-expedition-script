@@ -4,8 +4,8 @@ import { DateTime } from "luxon";
 import * as child_process from "child_process";
 
 // 102D7000 - Moms D7000
-// 108D3400 - My Camera
-const cameraPath = "E:/DCIM/108D3400";
+// 100D3400 - My Camera
+const cameraPath = "E:/DCIM/100D3400";
 const photosPath = "D:/Photos";
 const keepersPath = "D:/Photos/Keepers";
 const descriptionsTemplatePath = path.join(

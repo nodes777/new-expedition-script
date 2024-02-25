@@ -8,7 +8,7 @@ XLSX.set_fs(fs);
 
 const startTime = DateTime.now();
 const photosPath = "D:\\Photos";
-const cameraPath = "E:/DCIM/108D3400";
+const cameraPath = "E:/DCIM/100D3400";
 const keepersPath = "D:\\Photos\\Keepers";
 const file_prefix = "DSC_";
 const file_suffixes = [".JPG", ".NEF", ".MOV"];
