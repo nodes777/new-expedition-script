@@ -5,18 +5,18 @@
   "main": "main.ts",
   "type": "module",
   "scripts": {
-    "start": "ts-node src/main.ts",
+    "start": "tsx src/main.ts",
     "test": "test",
     "build": "tsc",
-    "new-exp": "ts-node src/main.ts",
-    "sort-photos": "ts-node src/sortPhotosCaller.ts"
+    "new-exp": "tsx src/main.ts",
+    "sort-photos": "tsx src/sortPhotosCaller.ts"
   },
-  "author": "Taylor Nodell and ChatGPT",
+  "author": "Taylor Nodell",
   "license": "GPL3.0",
   "devDependencies": {
     "@types/luxon": "3.2.0",
     "@types/node": "18.15.3",
-    "ts-node": "10.9.1",
+    "tsx": "4.10.5", 
     "typescript": "5.0.2"
   },
   "dependencies": {
